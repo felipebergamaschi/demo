@@ -1,6 +1,6 @@
 ### CSV data path
 
-src/main/resources/csv/movielist.csv
+src/main/resources/csv/movielist-original.csv
 
 ### to build
 

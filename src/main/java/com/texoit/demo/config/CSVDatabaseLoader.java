@@ -27,7 +27,7 @@ public class CSVDatabaseLoader {
     year, title, studios, producers, winner
   }
 
-  public static final String MOVIELIST_CSV = "classpath:csv/movielist.csv";
+  public static final String MOVIELIST_CSV = "classpath:csv/movielist-original.csv";
   public static final String STRING_VALUE_BOOLEAN_TRUE = "yes";
   public static final String DELIMITER = ";";
   private final AwardRepository awardRepository;
@@ -65,13 +65,19 @@ public class CSVDatabaseLoader {
   private List<Award> mapRecordToEntity(List<CSVRecord> records) {
     log.info("Mapping {} records to Award class", records.size());
     return records.stream()
-        .map(record -> Award.builder()
-            .year(Integer.valueOf(record.get(Headers.year)))
-            .title(record.get(Headers.title))
-            .producers(record.get(Headers.producers))
-            .studios(record.get(Headers.studios))
-            .winner(STRING_VALUE_BOOLEAN_TRUE.equalsIgnoreCase(record.get(Headers.winner)))
-            .build())
+        .flatMap(record -> {
+          final var producers = record.get(Headers.producers)
+              .replace(" and ", ", ")
+              .split(", ");
+
+          return Arrays.stream(producers).map(s -> Award.builder()
+              .year(Integer.valueOf(record.get(Headers.year)))
+              .title(record.get(Headers.title))
+              .producers(s)
+              .studios(record.get(Headers.studios))
+              .winner(STRING_VALUE_BOOLEAN_TRUE.equalsIgnoreCase(record.get(Headers.winner)))
+              .build());
+        })
         .toList();
   }
 

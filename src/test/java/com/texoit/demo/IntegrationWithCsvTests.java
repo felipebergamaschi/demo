@@ -22,23 +22,15 @@ public class IntegrationWithCsvTests {
     Assertions.assertThat(min)
         .isNotNull()
         .isNotEmpty()
-        .hasSize(2);
+        .hasSize(1);
     final var minItem1 = min.get(0);
     Assertions.assertThat(minItem1)
         .isNotNull()
         .hasNoNullFieldsOrProperties()
-        .hasFieldOrPropertyWithValue("producer", "Allan Carr")
+        .hasFieldOrPropertyWithValue("producer", "Joel Silver")
         .hasFieldOrPropertyWithValue("interval", 1)
-        .hasFieldOrPropertyWithValue("previousWin", 1982)
-        .hasFieldOrPropertyWithValue("followingWin", 1983);
-    final var minItem2 = min.get(1);
-    Assertions.assertThat(minItem2)
-        .isNotNull()
-        .hasNoNullFieldsOrProperties()
-        .hasFieldOrPropertyWithValue("producer", "Todd Garner, Jack Giarraputo and Adam Sandler")
-        .hasFieldOrPropertyWithValue("interval", 1)
-        .hasFieldOrPropertyWithValue("previousWin", 2011)
-        .hasFieldOrPropertyWithValue("followingWin", 2012);
+        .hasFieldOrPropertyWithValue("previousWin", 1990)
+        .hasFieldOrPropertyWithValue("followingWin", 1991);
     final var max = data.getMax();
     Assertions.assertThat(max)
         .isNotNull()
@@ -48,10 +40,10 @@ public class IntegrationWithCsvTests {
     Assertions.assertThat(maxItem1)
         .isNotNull()
         .hasNoNullFieldsOrProperties()
-        .hasFieldOrPropertyWithValue("producer", "Bill Cosby")
-        .hasFieldOrPropertyWithValue("interval", 9)
-        .hasFieldOrPropertyWithValue("previousWin", 1995)
-        .hasFieldOrPropertyWithValue("followingWin", 2004);
+        .hasFieldOrPropertyWithValue("producer", "Matthew Vaughn")
+        .hasFieldOrPropertyWithValue("interval", 13)
+        .hasFieldOrPropertyWithValue("previousWin", 2002)
+        .hasFieldOrPropertyWithValue("followingWin", 2015);
   }
 
 }
